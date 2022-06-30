@@ -933,6 +933,15 @@ open class FetchImpl constructor(override val namespace: String,
         }
     }
 
+    override fun getDownloadsWithStatusSyn(statuses: List<Status>, func: Func<List<Download>>): Fetch {
+        synchronized(lock) {
+            throwExceptionIfClosed()
+            val downloads = fetchHandler.getDownloadsWithStatus(statuses)
+            func.call(downloads)
+            return this
+        }
+    }
+
     override fun getAllGroupIds(func: Func<List<Int>>): Fetch {
         synchronized(lock) {
             throwExceptionIfClosed()

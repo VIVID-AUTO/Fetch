@@ -693,6 +693,9 @@ interface Fetch {
      * */
     fun getDownloadsWithStatus(statuses: List<Status>, func: Func<List<Download>>): Fetch
 
+    /** Same as above method, only switch operation to Synchronize.*/
+    fun getDownloadsWithStatusSyn(statuses: List<Status>, func: Func<List<Download>>): Fetch
+
     /**
      * Gets all downloads in a specific group with a specific status.
      * @see com.tonyodev.fetch2.Status
