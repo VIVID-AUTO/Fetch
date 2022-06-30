@@ -831,8 +831,10 @@ open class FetchImpl constructor(override val namespace: String,
     override fun getDownloadSyn(id: Int, func2: Func2<Download?>): Fetch {
         synchronized(lock) {
             throwExceptionIfClosed()
-            val download = fetchHandler.getDownload(id)
-            func2.call(download)
+            handlerWrapper.post {
+                val download = fetchHandler.getDownload(id)
+                func2.call(download)
+            }
             return this
         }
     }
@@ -853,8 +855,10 @@ open class FetchImpl constructor(override val namespace: String,
     override fun getDownloadsSyn(idList: List<Int>, func: Func<List<Download>>): Fetch {
         synchronized(lock) {
             throwExceptionIfClosed()
-            val downloads = fetchHandler.getDownloads(idList)
-            func.call(downloads)
+            handlerWrapper.post {
+                val downloads = fetchHandler.getDownloads(idList)
+                func.call(downloads)
+            }
             return this
         }
     }
@@ -888,8 +892,10 @@ open class FetchImpl constructor(override val namespace: String,
     override fun getDownloadsWithStatusSyn(status: Status, func: Func<List<Download>>): Fetch {
         synchronized(lock) {
             throwExceptionIfClosed()
-            val downloads = fetchHandler.getDownloadsWithStatus(status)
-            func.call(downloads)
+            handlerWrapper.post {
+                val downloads = fetchHandler.getDownloadsWithStatus(status)
+                func.call(downloads)
+            }
             return this
         }
     }
@@ -936,8 +942,10 @@ open class FetchImpl constructor(override val namespace: String,
     override fun getDownloadsWithStatusSyn(statuses: List<Status>, func: Func<List<Download>>): Fetch {
         synchronized(lock) {
             throwExceptionIfClosed()
-            val downloads = fetchHandler.getDownloadsWithStatus(statuses)
-            func.call(downloads)
+            handlerWrapper.post {
+                val downloads = fetchHandler.getDownloadsWithStatus(statuses)
+                func.call(downloads)
+            }
             return this
         }
     }
