@@ -645,6 +645,9 @@ interface Fetch {
      * */
     fun getDownloads(idList: List<Int>, func: Func<List<Download>>): Fetch
 
+    /** Same as above method, only switch operation to Synchronize.*/
+    fun getDownloadsSyn(idList: List<Int>, func: Func<List<Download>>): Fetch
+
     /**
      * Gets the download which has the specified id. If the download
      * does not exist null will be returned.
@@ -654,6 +657,9 @@ interface Fetch {
      * @return Instance
      * */
     fun getDownload(id: Int, func2: Func2<Download?>): Fetch
+
+    /** Same as above method, only switch operation to Synchronize.*/
+    fun getDownloadSyn(id: Int, func2: Func2<Download?>): Fetch
 
     /**
      * Gets all downloads in the specified group.
@@ -673,6 +679,9 @@ interface Fetch {
      * @return Instance
      * */
     fun getDownloadsWithStatus(status: Status, func: Func<List<Download>>): Fetch
+
+    /** Same as above method, only switch operation to Synchronize.*/
+    fun getDownloadsWithStatusSyn(status: Status, func: Func<List<Download>>): Fetch
 
     /**
      * Gets all downloads with a specific status.
