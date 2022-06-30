@@ -828,6 +828,15 @@ open class FetchImpl constructor(override val namespace: String,
         }
     }
 
+    override fun getDownloadSyn(id: Int, func2: Func2<Download?>): Fetch {
+        synchronized(lock) {
+            throwExceptionIfClosed()
+            val download = fetchHandler.getDownload(id)
+            func2.call(download)
+            return this
+        }
+    }
+
     override fun getDownloads(idList: List<Int>, func: Func<List<Download>>): Fetch {
         synchronized(lock) {
             throwExceptionIfClosed()
@@ -837,6 +846,15 @@ open class FetchImpl constructor(override val namespace: String,
                     func.call(downloads)
                 }
             }
+            return this
+        }
+    }
+
+    override fun getDownloadsSyn(idList: List<Int>, func: Func<List<Download>>): Fetch {
+        synchronized(lock) {
+            throwExceptionIfClosed()
+            val downloads = fetchHandler.getDownloads(idList)
+            func.call(downloads)
             return this
         }
     }
@@ -863,6 +881,15 @@ open class FetchImpl constructor(override val namespace: String,
                     func.call(downloads)
                 }
             }
+            return this
+        }
+    }
+
+    override fun getDownloadsWithStatusSyn(status: Status, func: Func<List<Download>>): Fetch {
+        synchronized(lock) {
+            throwExceptionIfClosed()
+            val downloads = fetchHandler.getDownloadsWithStatus(status)
+            func.call(downloads)
             return this
         }
     }
